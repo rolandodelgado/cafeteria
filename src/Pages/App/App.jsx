@@ -9,6 +9,7 @@ import Orders from '../Orders'
 import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar'
 import '../../App.css'
+import Layout from '../../Components/Layout'
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -54,12 +55,18 @@ function App() {
     <>
       {userId ? (
         <BrowserRouter>
-          <Navbar />
-          <Home onLogout={onLogoutHandler} userId={userId} />
+          <Layout>
+            <Navbar onLogout={onLogoutHandler} userId={userId} />
+            <Home onLogout={onLogoutHandler} userId={userId} />
+            {/* <AppRoutes />  */}
+          </Layout>
         </BrowserRouter>
         
       ) : (
-        <SignIn onLogin={onLoginHandler} />
+        <Layout>
+          <SignIn onLogin={onLoginHandler} />
+        </Layout>
+        
       )}
     {/* </>
     <>

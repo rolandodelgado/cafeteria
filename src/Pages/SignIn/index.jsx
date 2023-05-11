@@ -62,6 +62,7 @@ const SignIn = ({ onLogin }) => {
         placeholder="Ingrese contraseña"
         id="password"
         type="password"
+        autoComplete="current-password"
         onChange={(e) => {
           setPassword(e.target.value)
         }}

@@ -1,0 +1,234 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  font-weight: 500;
+  color: white;
+  text-decoration: inherit;
+}
+a:hover {
+  background: #03e9f4;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  /* place-items: center; */
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+h1 {
+  font-size: 3.2em;
+  line-height: 1.1;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: transparent;
+  cursor: pointer;
+  transition: border-color 0.25s;
+  
+}
+button:hover {
+  background: #3DCAD1;
+  color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 5px #3DCAD1,
+              0 0 25px #3DCAD1,
+              0 0 50px #3DCAD1,
+              0 0 100px #3DCAD1;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid #dee2e6;
+  border-radius: 0.8rem;
+  padding: 5rem;
+  box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+input {
+  display: block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #dee2e6;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  border-radius: 0.375rem;
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+  margin: 10px 0;
+  width: 100%; 
+}
+
+.icon {
+  width: 30px;
+  height: 30px;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+.productos {
+  padding: 3em;
+  border-radius: 8px;
+  width: 200px;
+  background-color: transparent;
+  border: 1px solid #dee2e6;
+}
+
+ul {
+  list-style: none; /* Quita los puntos de la lista */
+  padding: 0; /* Quita el espacio en blanco de la lista */
+}
+
+li {
+  margin-left: 1em; /* Agrega un margen para separar los elementos */
+}
+
+.coffeeBlock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-30%, -90%);
+  width: 10px;
+}
+
+.vapour span {
+  position: relative;
+  bottom: 70px;
+  display: block;
+  margin: 0 2px 5px;
+  min-width: 1px;
+  height: 15px;
+  background: #fff;
+  border-radius: 5%;
+  animation: animate 5s linear infinite;
+  opacity: 0;
+  filter: blur(10px);
+  animation-delay: calc(var(--v) * -0.5s);
+}
+
+@keyframes animate {
+  0% {
+      transform: translateY(0) scaleX(1);
+      opacity: 0;
+  }
+  15% {
+      opacity: 1;
+  }
+  50% {
+      transform: translateY(-150px) scaleX(5);
+  }
+  95% {
+      opacity: 0;
+  }
+  100% {
+      transform: translateY(-300px) scaleX(10);
+  }
+}
+
+.card {
+  padding: 2em;
+  border-radius: 8px;
+  width: 150px;
+}
+.card_A {
+  border: 10px solid #535bf2;
+  background-color:  #535bf2cc;
+}
+.card_P {
+  border: 10px solid #FFFF00;
+  background-color: #FFFF00bb
+}
+.card_L {
+  border: 10px solid #61dafb;
+  background-color: #61dafbaa;
+}
+.card_E {
+  border: 10px solid #FFA500;
+  background-color: #FFA500aa;
+}
+.card_F {
+  border: 10px solid #8d2626;
+  background-color: #8d2626aa;
+}
+
+.read-the-docs {
+  color: #888;
+}

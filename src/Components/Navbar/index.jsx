@@ -1,9 +1,7 @@
 import { useState, useEffect, useContext } from 'react'
 import { NavLink } from "react-router-dom"
-import { OrderContext } from '../../Context'
 
 const Navbar = ({onLogout, userId}) => {
-    const context = useContext(OrderContext)
     const [user, setUser] = useState()
 
     const activeStyle =  'text-center block border border-blue-500 rounded py-2 px-4 bg-blue-500 hover:bg-blue-700'
@@ -36,14 +34,6 @@ const Navbar = ({onLogout, userId}) => {
                 </li>
             </ul>
             <ul className='flex items-center gap-4'>
-                <li className='text-center rounded text-blue-500 py-2 px-4'>
-                    <NavLink to='/order'
-                    className={({isActive}) =>
-                        isActive ? activeStyle : undefined
-                    }>
-                        <h2>Order {context.count}</h2>
-                    </NavLink>                    
-                </li>
                 <li className='text-center rounded text-blue-500 py-2 px-4'>
                     <NavLink to='/orders'
                     className={({isActive}) =>

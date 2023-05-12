@@ -53,7 +53,7 @@ const Home = ({userId}) => {
 
   const content = role && role === 'recepcionista' ? (
     <>
-      <div className='grid grid-cols-2 gap-5 lg:grid-cols-4 md:grid-cols-3'>
+      <div className='grid grid-cols-2 gap-4 lg:grid-cols-4 md:grid-cols-2'>
         {items?.map(item => (<Card key={item.id} data={item}/>))}
       </div>
     </>

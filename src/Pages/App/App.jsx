@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { useRoutes, BrowserRouter } from 'react-router-dom'
+import {OrderProvider} from '../../Context'
 import jwtDecode from 'jwt-decode'
 import Home from '../Home'
 import MyAccount from '../MyAccount'
@@ -8,8 +9,9 @@ import Order from '../Order'
 import Orders from '../Orders'
 import SignIn from '../SignIn'
 import Navbar from '../../Components/Navbar'
-import '../../App.css'
 import Layout from '../../Components/Layout'
+import CheckoutOrder from '../../Components/CheckoutOrder'
+import '../../App.css'
 
 const AppRoutes = () => {
   let routes = useRoutes([
@@ -54,13 +56,16 @@ function App() {
   return (
     <>
       {userId ? (
-        <BrowserRouter>
-          <Layout>
-            <Navbar onLogout={onLogoutHandler} userId={userId} />
-            <Home onLogout={onLogoutHandler} userId={userId} />
-            {/* <AppRoutes />  */}
-          </Layout>
-        </BrowserRouter>
+        <OrderProvider>
+          <BrowserRouter>
+            <Layout>
+              <Navbar onLogout={onLogoutHandler} userId={userId} />
+              <Home userId={userId} />
+              {/* <AppRoutes />  */}
+              <CheckoutOrder />
+            </Layout>
+         </BrowserRouter>
+        </OrderProvider>
         
       ) : (
         <Layout>

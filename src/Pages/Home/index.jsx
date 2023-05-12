@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Card from '../../Components/Card'
 
-const Home = ({ onLogout, userId }) => {
+const Home = ({userId}) => {
   const [user, setUser] = useState()
   const [items, setItems] = useState(null)
 
@@ -49,11 +49,6 @@ const Home = ({ onLogout, userId }) => {
     fetchData()
   }, [userId])
   
-
-  const logoutHandler = () => {
-    onLogout()
-  }
-
   const role = user ? user.group_name : null
 
   const content = role && role === 'recepcionista' ? (
@@ -66,12 +61,7 @@ const Home = ({ onLogout, userId }) => {
 
   return (
     <>
-      <button onClick={logoutHandler}>Logout</button>
-      {user && <>
-        <h1>Bienvenido {user.username}!</h1>
-        <p>{user.group_name}</p>
         {content}
-      </>}
     </>
   )
 }

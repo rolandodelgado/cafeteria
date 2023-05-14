@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import { OrderContext } from '../../Context'
-import BuildingStorefrontIcon from '@heroicons/react/24/outline/BuildingStorefrontIcon'
-
+import {PlusIcon} from '@heroicons/react/24/outline'
 
 const Card = (data) => {
     //Order . count items
@@ -9,32 +8,32 @@ const Card = (data) => {
     //funcion para agregar items a la orden
     const addItemsToOrder = (event, itemData) => {
         event.stopPropagation()
-        context.setCount(context.count +1)
-        context.setOrders([...context.ordersItems, itemData])
+        //context.setCount(context.count +1)
+        context.setItems([...context.ordersItems, itemData])
         context.openOrder()
     }
     //funcion para mostrar orden
     const showOrder = (orderDetail) => {
         context.openOrder()
-        context.setOrders(orderDetail)
+        //context.setItems(orderDetail)
     }
 
     return(
         <div 
-            className='grid place-items-start'
-            onClick={() => context.openOrder()}>
-         <div 
-                className='bg-gradient-to-br from-sky-700 ... w-60 h-30 rounded-2xl'
+            className='bg-gradient-to-br from-sky-700 ...  cursor-pointer w-36 h-32 rounded-2xl'
+            // onClick={() => context.openOrder()}
+            >
+            <div 
+                className='relative mb-2 w-full h-4/5'
                 onClick={() => showOrder(data.data)}>
-                <figure className='relative mb-3 w-auto'>
-                   <div 
-                        className='text-black text-lg font-bold absolute py-2 bottom-2 right-2 flex justify-center items-center bg-white w-8 h-8 p-1 rounded-full'
+                <div 
+                    className='absolute top-0 right-0 justify-center items-center text-black  bg-white w-6 h-6 rounded-full m-2 p-1'
                         onClick={(event) => addItemsToOrder(event, data.data)}>
-                        <BuildingStorefrontIcon></BuildingStorefrontIcon>
+                        <PlusIcon></PlusIcon>
                     </div>
-                    <h1 className='text-center py-2 text-3xl'>{data.data.nombre}</h1>
-                    <h1 className='text-center py-2 text-2xl font-bold'>Gs.: {data.data.precio.toLocaleString()}</h1>
-                </figure>
+                <div className='text-lg text-transparent'>A</div>
+                <div><p className='relative text-lg font-semibold'>{data.data.nombre}</p></div>
+                <div><p className='absolute bottom-0 text-xl font-bold right-2'>Gs.: {data.data.precio.toLocaleString()}</p></div>                    
             </div>
         </div>
     )

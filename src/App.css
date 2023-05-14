@@ -17,10 +17,6 @@
   -webkit-text-size-adjust: 100%;
 }
 
-.gradient-background {
-  
-}
-
 a {
   font-weight: 500;
   color: white;
@@ -117,7 +113,6 @@ input {
 }
 
 #root {
-  max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
@@ -246,4 +241,8 @@ li {
 
 .read-the-docs {
   color: #888;
+}
+
+.nav-top {
+  margin-top: 0;
 }

@@ -1,63 +1,118 @@
 import { useState, useEffect } from 'react'
 import Card from '../../Components/Card'
+import KitchenCard from '../../Components/KitchenCard'
 
 const Home = ({userId}) => {
   const [user, setUser] = useState()
   const [items, setItems] = useState(null)
+  const [kitchenOrders, setKitchenOrders] = useState(null)
 
   // useEffect(() => {
-  //   fetch('http://localhost:8000/users/' + userId, {
-  //     method: 'GET' /* or POST/PUT/PATCH/DELETE */,
-  //     headers: {
-  //       Authorization: `Bearer ${JSON.parse(window.localStorage.getItem('accessToken'))}`,
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then((res) => res.json())
-  //     .then((userData) => {
-  //       setUser(userData)
-  //     })
-  // }, [])
+  //   const fetchData = async () => {
+  //     try {
+  //        const [userData, productsData, kitchenOrdersData] = await Promise.all([
+  //         fetch(`http://localhost:8000/users/${userId}`, {
+  //           method: 'GET',
+  //           headers: {
+  //             Authorization: `Bearer ${JSON.parse(
+  //               window.localStorage.getItem('accessToken')
+  //             )}`,
+  //             'Content-Type': 'application/json',
+  //           },
+  //         }).then((res) => res.json()),
+  //         fetch('http://localhost:8000/productos/', {
+  //           method: 'GET',
+  //           headers: {
+  //             Authorization: `Bearer ${JSON.parse(
+  //               window.localStorage.getItem('accessToken')
+  //             )}`,
+  //             'Content-Type': 'application/json',
+  //           },
+  //         }).then((res) => res.json()),
+  //         fetch('http://localhost:8000/pedidos/', {
+  //           method: 'GET',
+  //           headers: {
+  //             Authorization: `Bearer ${JSON.parse(
+  //               window.localStorage.getItem('accessToken')
+  //             )}`,
+  //             'Content-Type': 'application/json',
+  //           },
+  //         }).then((res) => res.json()),
+  //       ]);
+  //       setUser(userData);
+  //       setItems(productsData);
+  //       setKitchenOrders(kitchenOrdersData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  
+  //   fetchData();
+  // }, [{userId}]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [userData, productsData] = await Promise.all([
-          fetch('http://localhost:8000/users/' + userId, {
+         const [userData, kitchenOrdersData] = await Promise.all([
+          fetch(`http://localhost:8000/users/${userId}`, {
             method: 'GET',
             headers: {
-              Authorization: `Bearer ${JSON.parse(window.localStorage.getItem('accessToken'))}`,
+              Authorization: `Bearer ${JSON.parse(
+                window.localStorage.getItem('accessToken')
+              )}`,
               'Content-Type': 'application/json',
             },
-          }).then(res => res.json()),
-          fetch('http://localhost:8000/productos', {
+          }).then((res) => res.json()),
+          fetch('http://localhost:8000/pedidos/', {
             method: 'GET',
             headers: {
-              Authorization: `Bearer ${JSON.parse(window.localStorage.getItem('accessToken'))}`,
+              Authorization: `Bearer ${JSON.parse(
+                window.localStorage.getItem('accessToken')
+              )}`,
               'Content-Type': 'application/json',
             },
-           }).then(res => res.json())
-          //.then(res => console.log(res.json()))
-        ])
-        setUser(userData)
-        setItems(productsData)
+          }).then((res) => res.json()),
+        ]);
+        setUser(userData);
+        setKitchenOrders(kitchenOrdersData);
+        //solo si es rol recepcionista hace fectch a productos
+        if (userData.group_name == 'recepcionista') {
+          const productsData = await fetch('http://localhost:8000/productos/', {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${JSON.parse(
+                window.localStorage.getItem('accessToken')
+              )}`,
+              'Content-Type': 'application/json',
+            },
+          }).then((res) => res.json());
+          setItems(productsData);
+        }
       } catch (error) {
-        console.log(error)
+        console.log(error);
       }
-    }
+    };
   
-    fetchData()
-  }, [userId])
+    fetchData();
+  }, [{userId}]);
+  
   
   const role = user ? user.group_name : null
 
   const content = role && role === 'recepcionista' ? (
     <>
-      <div className='grid grid-cols-2 gap-4 lg:grid-cols-4 md:grid-cols-2'>
-        {items?.map(item => (<Card key={item.id} data={item}/>))}
+      <div className='flex'>
+        <div className='flex w-60'></div>
+        <div className='grid grid-cols-2 gap-2'>
+          {items?.map(item => (<Card key={item.id} data={item}/>))}
+        </div>
+        <div className='flex w-60'></div>
       </div>
     </>
-  ) : <p>Cocinero</p>;
+  ) :
+        <div className='grid grid-cols-3 gap-4'>
+          {kitchenOrders?.map(kitchenOrder => (<KitchenCard key={kitchenOrder.id} data={kitchenOrder}/>))}
+        </div>
 
   return (
     <>

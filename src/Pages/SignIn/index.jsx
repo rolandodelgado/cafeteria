@@ -47,7 +47,10 @@ const SignIn = ({ onLogin }) => {
         </div>
       </div>
         <img src={coffeeIcon} alt="Coffee Icon" width={100} />
-        <h2>Coffee Time ⌚ </h2>
+        <div className='flex justify-center gap-1'>
+                        <h4 className="font-sans italic text-2xl">It's</h4>
+                        <h4 className="font-extrabold text-2xl">Coffee Time</h4>
+                    </div>
      <input
         aria-label="Username"
         placeholder="Ingrese usuario"

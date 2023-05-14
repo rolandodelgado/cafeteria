@@ -4,27 +4,46 @@ export const OrderContext = createContext()
 
 export const OrderProvider = ({children}) => {
     //Order . count items
-    const [count, setCount] = useState(0)
+    //const [count, setCount] = useState(0)
 
-    //Orders . Add items
-    const [ordersItems, setOrders] = useState([])
+    //Order . Add items to order
+    const [ordersItems, setItems] = useState([])
 
-    // Open and Close
+    //Orders . Add order to orders    
+    const [orders, setOrders] = useState([])
+
+    // Open and Close Order
     const [isOrderOpen, setIsOrderOpen] = useState(false)
     const openOrder = () => setIsOrderOpen(true)
     const closeOrder = () => setIsOrderOpen(false)
 
-    //console.log('COUNT: ', count)
-    console.log(ordersItems)
+    // Open and Close Orders
+    const [isOrdersOpen, setIsOrdersOpen] = useState(false)
+    const openOrders = () => setIsOrdersOpen(true)
+    const closeOrders = () => setIsOrdersOpen(false)
+
+    // Tiempo transcurrido
+    const [tiempo, setTiempo] = useState()
+
+    // Número de Mesa
+    const [mesa, setMesa] = useState()
     return(
         <OrderContext.Provider value={{
-            count,
-            setCount,
+            //count,
+            //setCount,
             openOrder,
             closeOrder,
             isOrderOpen,
+            openOrders,
+            closeOrders,
+            isOrdersOpen,
             ordersItems,
-            setOrders
+            setItems,
+            orders,
+            setOrders,
+            tiempo,
+            setTiempo,
+            mesa,setMesa
         }}>
             {children}
         </OrderContext.Provider>

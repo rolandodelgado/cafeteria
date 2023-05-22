@@ -1,7 +1,7 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import {XMarkIcon} from '@heroicons/react/24/solid'
 import { OrderContext } from "../../Context"
-import {totalPrice} from '../../utils'
+import { totalPrice} from '../../utils'
 import OrderCard from "../OrderCard";
 import './style.css'
 import React, { useRef } from 'react';
@@ -9,6 +9,8 @@ import React, { useRef } from 'react';
 const CheckoutOrder = () => {
     const context = useContext(OrderContext)
     const clienteRef = useRef(null)
+    const mesaRef = useRef(null)
+    const [selectedValue, setSelectedValue] = useState("1");
 
     //funcion para elimitar items de Orders
     const handleDelete = (id) => {
@@ -18,7 +20,7 @@ const CheckoutOrder = () => {
 
     const handleCheckout = async () => {
         const orderToAdd = {
-            mesa: 4,
+            mesa: mesaRef.current.value ? mesaRef.current.value : 1,
             lista_productos: context.ordersItems.map(product => ({
                 id: product.id,
                 nombre: product.nombre,
@@ -42,9 +44,10 @@ const CheckoutOrder = () => {
                 // Clear the order items if the order is successfully saved
                 context.setItems([])
                 clienteRef.current.value =""
-                context.closeOrder()
-                context.openOrders()
+                // context.closeOrder()
+                // context.openOrders()
             } else {
+                console.log(orderToAdd);
                 throw new Error('Failed to save the order')
             }
         } catch (error) {
@@ -66,14 +69,20 @@ const CheckoutOrder = () => {
                 </div>
             </div>
             {/* Nombre del cliente */}
-            <div>
-            <input className='m-4 w-auto'
-                aria-label="Cliente"
-                placeholder="Ingrese nombre"
-                id="cliente"
-                type="text"
-                ref={clienteRef}
-                />
+            <div className='flex justify-between items-center p-4' >
+                <input className='w-40'
+                    aria-label="Cliente"
+                    placeholder="Ingrese nombre"
+                    id="cliente"
+                    type="text"
+                    ref={clienteRef}
+                    />
+                <select className='w-10 h-9 border-transparent rounded-lg text-black bg-white' id="mesa" value={selectedValue} onChange={(e) => setSelectedValue(e.target.value)} ref={mesaRef}>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                </select>
             </div>
             {/* Lista de Ordenes */}
             <div className='px-4 overflow-x-hidden flex-1'>
@@ -95,7 +104,7 @@ const CheckoutOrder = () => {
                     <span>Total Gs.: </span>
                     <span>{totalPrice(context.ordersItems).toLocaleString('es-PY')} </span>
                 </p>
-                <button onClick={() => handleCheckout()}>Checkout</button>
+                <button className="border-2 border-white w-full p-2 rounded hover:bg-blue-700" onClick={() => handleCheckout()}>Order</button>
             </div>
         </aside>
     )

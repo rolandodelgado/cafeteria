@@ -70,7 +70,7 @@ const SignIn = ({ onLogin }) => {
           setPassword(e.target.value)
         }}
       />
-      <button type="submit">Login</button>
+      <button type="submit" className='w-full border-white border-2' >Login</button>
     </>
     </form>
     </div>

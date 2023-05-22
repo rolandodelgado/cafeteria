@@ -3,11 +3,14 @@ import { createContext, useState } from 'react'
 export const OrderContext = createContext()
 
 export const OrderProvider = ({children}) => {
-    //Order . count items
-    //const [count, setCount] = useState(0)
+    //Home . user
+    const [usuario, setUsuario] = useState()
 
     //Order . Add items to order
     const [ordersItems, setItems] = useState([])
+
+    //kitchen cards . Add products
+    const [products, setProducts] = useState([])
 
     //Orders . Add order to orders    
     const [orders, setOrders] = useState([])
@@ -29,8 +32,8 @@ export const OrderProvider = ({children}) => {
     const [mesa, setMesa] = useState()
     return(
         <OrderContext.Provider value={{
-            //count,
-            //setCount,
+            usuario,
+            setUsuario,
             openOrder,
             closeOrder,
             isOrderOpen,
@@ -43,7 +46,10 @@ export const OrderProvider = ({children}) => {
             setOrders,
             tiempo,
             setTiempo,
-            mesa,setMesa
+            mesa,
+            setMesa,
+            products,
+            setProducts
         }}>
             {children}
         </OrderContext.Provider>

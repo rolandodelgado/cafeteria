@@ -8,3 +8,10 @@ export const totalPrice = (products) => {
     products.forEach(product => sum += product.precio)
     return sum
 } 
+
+let lastId = 0;
+
+export function generateAutoId() {
+  lastId++;
+  return lastId;
+}

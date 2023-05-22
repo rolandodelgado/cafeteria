@@ -6,8 +6,6 @@ const Navbar = ({onLogout, userId}) => {
 
     const context = useContext(OrderContext)
 
-    const activeStyle =  'bg-red-500'
-    
     const showOrder = () => {
         context.openOrder()
     }
@@ -65,8 +63,8 @@ const Navbar = ({onLogout, userId}) => {
                     </h4>
                 </li>
                 )}
-                <li className='text-center text-lg font-light rounded text-blue-500 py-2 px-0'>
-                        <button onClick={logoutHandler}>Logout</button>
+                <li className='text-center text-sm font-light rounded text-blue-500'>
+                        <button className="text-white  py-2 px-4 w-full rounded hover:bg-blue-700" onClick={logoutHandler}>Logout</button>
                 </li>
             </ul>
         </nav>

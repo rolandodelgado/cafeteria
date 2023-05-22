@@ -41,8 +41,7 @@ function App() {
               <CheckoutOrder />
               <StatusOrder />
             </Layout>
-        </OrderProvider>
-        
+        </OrderProvider>        
       ) : (
         <Layout>
           <SignIn onLogin={onLoginHandler} />

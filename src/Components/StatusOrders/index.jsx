@@ -16,10 +16,15 @@ const StatusOrders = () => {
             'Content-Type': 'application/json',
           },
         })
-          .then((res) => res.json())
-          .then((ordersData) => {
-            setOrders(ordersData)
-          })
+        .then((res) => res.json())
+        .then((ordersData) => {
+          // Filtrar los pedidos con estado diferente a 'Finalizado'
+          const filteredOrdersData = ordersData.filter(
+            (pedido) => pedido.estado !== 'Finalizado'
+          );
+    
+          setOrders(filteredOrdersData);
+        });
       }, [orders]) //orders como dependencia para renderizar cuando hay cambios
   
     return (
@@ -39,7 +44,12 @@ const StatusOrders = () => {
             {/* lista de ordenes */}
             <div className='px-4 overflow-x-hidden flex-1 right-0'>
               {orders?.filter(order => order.estado !== 'Finalizado').map(order => (
-              <OrdersCard key={order.id} data={order} />
+              <OrdersCard 
+                key={order.id}
+                id={order.id}
+                customer={order.cliente}
+                table={order.mesa}
+                status={order.estado} />
               ))}
             </div>
         </aside>
